@@ -59,6 +59,9 @@ func (h *Handler) HandleGitHub(w http.ResponseWriter, r *http.Request) {
 	// Parse the event
 	var event GitHubPullRequestEvent
 	if err := json.Unmarshal(body, &event); err != nil {
+		// Log the error for debugging
+		fmt.Printf("Failed to parse GitHub event: %v\n", err)
+		fmt.Printf("Event body: %s\n", string(body))
 		http.Error(w, "Failed to parse event", http.StatusBadRequest)
 		return
 	}
@@ -108,10 +111,10 @@ type GitHubPullRequestEvent struct {
 	Action      string `json:"action"`
 	Number      int    `json:"number"`
 	PullRequest struct {
-		ID     int    `json:"id"`
-		Number int    `json:"number"`
-		Title  string `json:"title"`
-		Body   string `json:"body"`
+		ID     int     `json:"id"`
+		Number int     `json:"number"`
+		Title  string  `json:"title"`
+		Body   *string `json:"body"` // Pointer to handle null values
 		User   struct {
 			Login string `json:"login"`
 		} `json:"user"`

@@ -104,7 +104,10 @@ func processEvent(body []byte, codeAnalyzer *analyzer.Analyzer, githubClient *sc
 	repo := event.Repository.Name
 	prNumber := event.PullRequest.Number
 	title := event.PullRequest.Title
-	description := event.PullRequest.Body
+	description := ""
+	if event.PullRequest.Body != nil {
+		description = *event.PullRequest.Body
+	}
 	author := event.PullRequest.User.Login
 	commitID := event.PullRequest.Head.Sha
 
