@@ -74,8 +74,13 @@ func (h *Handler) HandleGitHub(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Log the event for debugging
+	fmt.Printf("[INFO] Processing PR #%d action: %s from %s/%s\n",
+		event.Number, action, event.Repository.Owner.Login, event.Repository.Name)
+
 	// Publish to queue for processing
 	if err := h.queue.Publish(event); err != nil {
+		fmt.Printf("[ERROR] Failed to queue event: %v\n", err)
 		http.Error(w, "Failed to queue event", http.StatusInternalServerError)
 		return
 	}
@@ -111,7 +116,7 @@ type GitHubPullRequestEvent struct {
 	Action      string `json:"action"`
 	Number      int    `json:"number"`
 	PullRequest struct {
-		ID     int     `json:"id"`
+		ID     int64   `json:"id"` // int64 for large GitHub IDs
 		Number int     `json:"number"`
 		Title  string  `json:"title"`
 		Body   *string `json:"body"` // Pointer to handle null values
