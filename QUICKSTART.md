@@ -163,4 +163,4 @@ To test locally before deploying:
 GitHub PR → Webhook → Queue → Worker → LLM Analysis → Post Review → GitHub
 ```
 
-Enjoy your AI code reviewer! 🤖✨
+Enjoy your AI code reviewer!

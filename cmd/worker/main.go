@@ -153,31 +153,31 @@ func processEvent(body []byte, codeAnalyzer *analyzer.Analyzer, githubClient *sc
 }
 
 func formatComment(comment llm.ReviewComment) string {
-	emoji := "ℹ️"
+	prefix := "[INFO]"
 	switch comment.Severity {
 	case "warning":
-		emoji = "⚠️"
+		prefix = "[WARNING]"
 	case "error":
-		emoji = "🚨"
+		prefix = "[ERROR]"
 	}
-	return emoji + " " + comment.Body
+	return prefix + " " + comment.Body
 }
 
 func formatReviewSummary(review *llm.CodeReviewResponse) string {
-	summary := "## 🤖 AI Code Review\n\n"
+	summary := "## AI Code Review\n\n"
 	summary += review.Summary + "\n\n"
 
 	if len(review.Comments) > 0 {
 		summary += "### Comments\n\n"
 		for _, comment := range review.Comments {
-			emoji := "ℹ️"
+			prefix := "[INFO]"
 			switch comment.Severity {
 			case "warning":
-				emoji = "⚠️"
+				prefix = "[WARNING]"
 			case "error":
-				emoji = "🚨"
+				prefix = "[ERROR]"
 			}
-			summary += fmt.Sprintf("- %s **%s**:%d - %s\n", emoji, comment.Filename, comment.Line, comment.Body)
+			summary += fmt.Sprintf("- %s **%s**:%d - %s\n", prefix, comment.Filename, comment.Line, comment.Body)
 		}
 	}
 

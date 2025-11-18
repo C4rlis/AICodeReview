@@ -85,7 +85,7 @@ docker-compose restart
 
 ## Test Results
 
-Current status: **✅ 12/12 tests passing**
+Current status: **12/12 tests passing**
 
 ```
 ✓ Config validation (6 tests)

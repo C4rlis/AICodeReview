@@ -102,7 +102,7 @@ go run .\cmd\worker\main.go
    ```powershell
    .\build.ps1 test
    ```
-   Should show: ✅ 12/12 tests passing
+   Should show: 12/12 tests passing
 
 3. **Check Docker services:**
    ```powershell
