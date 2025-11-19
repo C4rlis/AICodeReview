@@ -15,10 +15,16 @@ import (
 	"github.com/carlr/codereviewtool/internal/scm"
 	"github.com/carlr/codereviewtool/internal/webhook"
 	"github.com/carlr/codereviewtool/pkg/llm"
+	"github.com/joho/godotenv"
 )
 
 func main() {
 	log.Println("Starting Code Review AI - Worker")
+
+	// Load .env file
+	if err := godotenv.Load(); err != nil {
+		log.Println("Warning: .env file not found, using environment variables")
+	}
 
 	// Load configuration
 	cfg, err := config.Load()
@@ -98,7 +104,10 @@ func processEvent(body []byte, codeAnalyzer *analyzer.Analyzer, githubClient *sc
 	repo := event.Repository.Name
 	prNumber := event.PullRequest.Number
 	title := event.PullRequest.Title
-	description := event.PullRequest.Body
+	description := ""
+	if event.PullRequest.Body != nil {
+		description = *event.PullRequest.Body
+	}
 	author := event.PullRequest.User.Login
 	commitID := event.PullRequest.Head.Sha
 

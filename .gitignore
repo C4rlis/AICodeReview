@@ -23,6 +23,10 @@ vendor/
 # IDE
 .vscode/
 .idea/
+
+# Test files
+test_payload.json
+test_parse.go
 *.swp
 *.swo
 *~

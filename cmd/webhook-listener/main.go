@@ -9,10 +9,16 @@ import (
 	"github.com/carlr/codereviewtool/internal/queue"
 	"github.com/carlr/codereviewtool/internal/webhook"
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 )
 
 func main() {
 	log.Println("Starting Code Review AI - Webhook Listener")
+
+	// Load .env file
+	if err := godotenv.Load(); err != nil {
+		log.Println("Warning: .env file not found, using environment variables")
+	}
 
 	// Load configuration
 	cfg, err := config.Load()
