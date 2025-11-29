@@ -2,7 +2,7 @@
 
 ## First Time Setup
 
-### Option 1: Using PowerShell (Recommended)
+### Option 1: Using PowerShell(Windows) (Recommended)
 
 If you get a "scripts is disabled" error, run this **once** as Administrator:
 
@@ -161,18 +161,3 @@ powershell -ExecutionPolicy Bypass -File .\build.ps1
 3. Ports 8080, 5672, 5432, 15672 are not in use
 4. API keys are valid
 
-## Next Steps
-
-Once everything is running:
-
-1. **Configure GitHub webhook** (see [QUICKSTART.md](QUICKSTART.md))
-2. **Create a test PR** in your repository
-3. **Watch the logs** for AI analysis
-4. **See the review** posted on your PR!
-
-## Getting Help
-
-- Build issues: Check [BUILD.md](BUILD.md)
-- Testing: See [TESTING.md](TESTING.md)
-- General setup: Read [QUICKSTART.md](QUICKSTART.md)
-- Full docs: See [README.md](README.md)
